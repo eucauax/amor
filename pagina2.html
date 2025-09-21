@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eu te amo 🤍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #2a002a 0%, #6a006a 50%, #ff69b4 100%);
+      color: white;
+      font-family: 'Great Vibes', cursive;
+      text-align: center;
+      
+    }
+
+    .conteudo {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      max-width: 800px;
+      margin: 100px auto;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: #ff4d6d;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 22px;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    .tempo {
+      font-size: 28px;
+      margin-top: 15px;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+
+    .coracao-caindo {
+      position: absolute;
+      color: white;
+      font-size: 20px;
+      animation-name: cair;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes cair {
+      0% {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+      5% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(120vh);
+        opacity: 0;
+      }
+    }
+
+    audio {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Música de fundo -->
+<audio id="player" controls autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+  Seu navegador não suporta áudio.
+</audio>
+
+  <div class="conteudo">
+    <!-- Imagem entre player e título -->
+    <img src="imagem-meio.jpg" alt="Foto especial" style="max-width:200px; border-radius:10px; margin:20px auto; display:block;">
+
+    <h1>Eu te amo há:</h1>
+    <div class="tempo" id="contador"></div>
+
+    <p>
+      Mesmo sem termos nos encontrado pessoalmente, meu coração já sente você tão perto. <br>
+      A distância nunca foi capaz de diminuir o que eu sinto, pelo contrário, só fortaleceu ainda mais o meu amor. <br>
+      Cada palavra sua ilumina o meu dia e me faz ter certeza de que você é alguém único e especial para mim. <br><br>
+      <strong style="color: #ff4d6d;">Te amo, mesmo de longe, e sempre vou te amar 🤍</strong>
+    </p>
+  </div>
+
+  <script>
+    const inicio = new Date("2025-09-01T23:14:00");
+
+    function atualizarContador() {
+      const agora = new Date();
+      let diff = inicio - agora;
+
+      if (diff < 0) {
+        diff = agora - inicio;
+      }
+
+      const segundos = Math.floor(diff / 1000);
+      const minutos = Math.floor(segundos / 60);
+      const horas = Math.floor(minutos / 60);
+      const diasTotais = Math.floor(horas / 24);
+
+      const horasRestantes = horas % 24;
+      const minutosRestantes = minutos % 60;
+      const segundosRestantes = segundos % 60;
+
+      document.getElementById('contador').innerText = 
+        `${diasTotais} dias, ${horasRestantes} horas, ${minutosRestantes} minutos e ${segundosRestantes} segundos`;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    function criarCoracao() {
+      const coracao = document.createElement('div');
+      coracao.classList.add('coracao-caindo');
+      coracao.innerHTML = '🤍';
+      coracao.style.left = Math.random() * 100 + 'vw';
+      coracao.style.fontSize = (Math.random() * 30 + 20) + 'px';
+      coracao.style.animationDuration = (Math.random() * 5 + 8) + 's';
+
+      document.body.appendChild(coracao);
+
+      setTimeout(() => {
+        coracao.remove();
+      }, parseFloat(coracao.style.animationDuration) * 1000 + 500);
+    }
+
+    setInterval(criarCoracao, 1500);
+  </script>
+
+</body>
+</html>
