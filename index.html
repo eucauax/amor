@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página com Botão</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #2a002a 0%, #6a006a 50%, #ff69b4 100%);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      z-index: 1;
+    }
+
+    .botao {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #ff69b4;
+      color: #000;
+      border: 2px solid #ff69b4;
+      padding: 15px 30px;
+      font-size: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 0 5px #ff69b4, 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 40px #ff69b4 inset;
+      position: relative;
+      overflow: hidden;
+      animation: neonPulse 1.5s infinite alternate;
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+      z-index: 1;
+    }
+
+    .botao:hover {
+      color: #fff;
+      background-color: transparent;
+      box-shadow: 0 0 5px #ff69b4, 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 40px #ff69b4;
+      animation: none;
+    }
+
+    .coracao {
+      font-size: 32px;
+    }
+    
+    .coracao-caindo {
+      position: absolute;
+      color: white;
+      font-size: 20px;
+      animation-name: cair;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes cair {
+      0% {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+      5% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(120vh);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes neonPulse {
+      from {
+        box-shadow: 0 0 5px #ff69b4, 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+      }
+      to {
+        box-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 40px #ff69b4, 0 0 80px #ff69b4;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="pagina2.html" class="botao">
+    Clique <span class="coracao">🤍</span>
+  </a>
+
+  <script>
+    function criarCoracao() {
+      const coracao = document.createElement('div');
+      coracao.classList.add('coracao-caindo');
+      coracao.innerHTML = '🤍';
+      coracao.style.left = Math.random() * 100 + 'vw';
+      coracao.style.fontSize = (Math.random() * 30 + 20) + 'px';
+      coracao.style.animationDuration = (Math.random() * 5 + 8) + 's';
+
+      document.body.appendChild(coracao);
+
+      setTimeout(() => {
+        coracao.remove();
+      }, parseFloat(coracao.style.animationDuration) * 1000 + 500);
+    }
+
+    setInterval(criarCoracao, 1500);
+  </script>
+</body>
+</html>
