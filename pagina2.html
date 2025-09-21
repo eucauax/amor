@@ -113,6 +113,8 @@
   window.addEventListener('load', () => {
     const audio = document.getElementById('player');
 
+<script src="autoplay.js"></script>
+    
     // Tenta tocar automaticamente
     audio.play().catch(() => {
       // Se o navegador bloquear, inicia quando o usuário clicar/tocar
