@@ -88,10 +88,25 @@
 <body>
 
   <!-- Música de fundo -->
-<audio id="player" controls autoplay loop>
+<audio id="player" loop>
   <source src="musica.mp3" type="audio/mpeg">
   Seu navegador não suporta áudio.
 </audio>
+
+<script>
+  // Força o autoplay assim que a página carregar
+  window.addEventListener('load', () => {
+    const audio = document.getElementById('player');
+
+    // Tenta tocar automaticamente
+    audio.play().catch(() => {
+      // Se o navegador bloquear, inicia quando o usuário clicar/tocar
+      document.body.addEventListener('click', () => {
+        audio.play();
+      }, { once: true });
+    });
+  });
+</script>
 
   <div class="conteudo">
     <h1>Eu te amo há:</h1>
